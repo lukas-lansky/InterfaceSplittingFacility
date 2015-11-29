@@ -1,16 +1,39 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Castle.Windsor;
-using Castle.MicroKernel.Registration;
+﻿#pragma warning disable SA1402
+#pragma warning disable SA1649
 
 namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
 {
+    using Castle.MicroKernel.Registration;
+    using Castle.Windsor;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    public interface IBig : ISmall1, ISmall2, ISmall3 { }
+
+    public interface ISmall1
+    {
+        int SmallMethod1();
+    }
+
+    public interface ISmall2
+    {
+        int SmallMethod2();
+
+        int SmallMethod3();
+    }
+
+    public interface ISmall3
+    {
+        int SmallMethod4();
+    }
+
     [TestClass]
     public class BasicImplicitDeclaration
     {
         [TestMethod]
         public void AssertIt()
         {
-            var container = new WindsorContainer().AddFacility<InterfaceSplittingFacility>();
+            var container = new WindsorContainer()
+                .AddFacility<InterfaceSplittingFacility>();
 
             container.Register(
                 Component.For<ISmall1>().ImplementedBy<DefaultSmall1>().LifestyleTransient(),
@@ -28,28 +51,12 @@ namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
         }
     }
 
-    public interface IBig : ISmall1, ISmall2, ISmall3
-    {
-
-    }
-
-    public interface ISmall1
-    {
-        int SmallMethod1();
-    }
-
     public class DefaultSmall1 : ISmall1
     {
         public int SmallMethod1()
         {
             return 1;
         }
-    }
-
-    public interface ISmall2
-    {
-        int SmallMethod2();
-        int SmallMethod3();
     }
 
     public class DefaultSmall2 : ISmall2
@@ -63,11 +70,6 @@ namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
         {
             return 3;
         }
-    }
-
-    public interface ISmall3
-    {
-        int SmallMethod4();
     }
 
     public class DefaultSmall3 : ISmall3

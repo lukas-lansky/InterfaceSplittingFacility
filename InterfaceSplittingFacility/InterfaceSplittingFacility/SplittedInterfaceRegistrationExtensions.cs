@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Castle.MicroKernel.Registration;
-
-namespace InterfaceSplittingFacility
+﻿namespace InterfaceSplittingFacility
 {
+    using System.Linq;
+    using Castle.MicroKernel.Registration;
+
     public static class SplittedInterfaceRegistrationExtensions
     {
         public static ComponentRegistration<T> ImplementedAsSplittedInterface<T>(this ComponentRegistration<T> componentRegistration)

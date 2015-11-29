@@ -1,13 +1,13 @@
-﻿using Castle.MicroKernel.Facilities;
-using Castle.MicroKernel.Registration;
-
-namespace InterfaceSplittingFacility
+﻿namespace InterfaceSplittingFacility
 {
+    using Castle.MicroKernel.Facilities;
+    using Castle.MicroKernel.Registration;
+
     public class InterfaceSplittingFacility : AbstractFacility
     {
         protected override void Init()
         {
-            Kernel.Register(
+            this.Kernel.Register(
                 Component
                     .For(typeof(InterfaceSplittingInterceptor<>))
                     .LifestyleTransient());

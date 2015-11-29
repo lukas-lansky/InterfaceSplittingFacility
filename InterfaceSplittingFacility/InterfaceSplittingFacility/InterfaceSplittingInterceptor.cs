@@ -1,14 +1,14 @@
-﻿using Castle.DynamicProxy;
-
-namespace InterfaceSplittingFacility
+﻿namespace InterfaceSplittingFacility
 {
-    public class InterfaceSplittingInterceptor<T> : IInterceptor
+    using Castle.DynamicProxy;
+
+    public sealed class InterfaceSplittingInterceptor<T> : IInterceptor
     {
-        protected readonly T Implementation;
+        private readonly T implementation;
 
         public InterfaceSplittingInterceptor(T implementation)
         {
-            Implementation = implementation;
+            this.implementation = implementation;
         }
 
         public void Intercept(IInvocation invocation)
@@ -23,7 +23,7 @@ namespace InterfaceSplittingFacility
             }
             else
             {
-                invocation.ReturnValue = method.Invoke(Implementation, invocation.Arguments);
+                invocation.ReturnValue = method.Invoke(this.implementation, invocation.Arguments);
             }
         }
     }
