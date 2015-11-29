@@ -1,6 +1,7 @@
 ﻿namespace InterfaceSplittingFacility
 {
     using Castle.DynamicProxy;
+    using System.Linq;
 
     public sealed class InterfaceSplittingInterceptor<T> : IInterceptor
     {
@@ -14,8 +15,9 @@
         public void Intercept(IInvocation invocation)
         {
             var methodName = invocation.Method.Name;
+            var methodArgumentTypes = invocation.Arguments.Select(a => a.GetType()).ToArray();
 
-            var method = typeof(T).GetMethod(methodName);
+            var method = typeof(T).GetMethod(methodName, methodArgumentTypes);
 
             if (method == null)
             {
