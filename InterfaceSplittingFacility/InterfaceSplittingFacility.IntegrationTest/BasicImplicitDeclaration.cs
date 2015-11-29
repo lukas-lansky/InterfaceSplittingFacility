@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Castle.Windsor;
-using System;
 using Castle.MicroKernel.Registration;
 
 namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration

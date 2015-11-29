@@ -9,7 +9,7 @@ namespace InterfaceSplittingFacility
         {
             Kernel.Register(
                 Component
-                    .For<InterfaceSplittingInterceptor>()
+                    .For(typeof(InterfaceSplittingInterceptor<>))
                     .LifestyleTransient());
         }
     }
