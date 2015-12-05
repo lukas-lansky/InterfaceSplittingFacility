@@ -61,6 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AlternativeExplicitDeclaration.cs" />
+    <Compile Include="FailingExplicitDeclaration.cs" />
     <Compile Include="BasicExplicitDeclaration.cs" />
     <Compile Include="BasicImplicitDeclaration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

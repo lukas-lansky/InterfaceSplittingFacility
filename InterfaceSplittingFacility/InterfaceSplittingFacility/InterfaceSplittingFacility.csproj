@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterfaceSplittingFacility.cs" />
+    <Compile Include="InterfaceSplittingBottomInterceptor.cs" />
     <Compile Include="InterfaceSplittingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplittedInterfaceRegistrationExtensions.cs" />

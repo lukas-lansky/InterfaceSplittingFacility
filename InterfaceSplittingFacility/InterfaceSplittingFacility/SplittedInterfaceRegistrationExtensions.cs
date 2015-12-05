@@ -10,7 +10,8 @@
         {
             var interfaces = typeof(T).GetInterfaces();
 
-            return componentRegistration.Interceptors(WrapTypesIntoInterceptor(interfaces));
+            return componentRegistration.Interceptors(
+                WrapTypesIntoInterceptor(interfaces).Concat(new[] { typeof(InterfaceSplittingBottomInterceptor) }).ToArray());
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1>(
@@ -18,7 +19,8 @@
             where T : class
         {
             return componentRegistration.Interceptors(
-                typeof(InterfaceSplittingInterceptor<Impl1>));
+                typeof(InterfaceSplittingInterceptor<Impl1>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2>(
@@ -27,7 +29,8 @@
         {
             return componentRegistration.Interceptors(
                 typeof(InterfaceSplittingInterceptor<Impl1>),
-                typeof(InterfaceSplittingInterceptor<Impl2>));
+                typeof(InterfaceSplittingInterceptor<Impl2>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3>(
@@ -37,7 +40,8 @@
             return componentRegistration.Interceptors(
                 typeof(InterfaceSplittingInterceptor<Impl1>),
                 typeof(InterfaceSplittingInterceptor<Impl2>),
-                typeof(InterfaceSplittingInterceptor<Impl3>));
+                typeof(InterfaceSplittingInterceptor<Impl3>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3, Impl4>(
@@ -48,7 +52,8 @@
                 typeof(InterfaceSplittingInterceptor<Impl1>),
                 typeof(InterfaceSplittingInterceptor<Impl2>),
                 typeof(InterfaceSplittingInterceptor<Impl3>),
-                typeof(InterfaceSplittingInterceptor<Impl4>));
+                typeof(InterfaceSplittingInterceptor<Impl4>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3, Impl4, Impl5>(
@@ -60,7 +65,8 @@
                 typeof(InterfaceSplittingInterceptor<Impl2>),
                 typeof(InterfaceSplittingInterceptor<Impl3>),
                 typeof(InterfaceSplittingInterceptor<Impl4>),
-                typeof(InterfaceSplittingInterceptor<Impl5>));
+                typeof(InterfaceSplittingInterceptor<Impl5>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3, Impl4, Impl5, Impl6>(
@@ -73,7 +79,8 @@
                 typeof(InterfaceSplittingInterceptor<Impl3>),
                 typeof(InterfaceSplittingInterceptor<Impl4>),
                 typeof(InterfaceSplittingInterceptor<Impl5>),
-                typeof(InterfaceSplittingInterceptor<Impl6>));
+                typeof(InterfaceSplittingInterceptor<Impl6>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3, Impl4, Impl5, Impl6, Impl7>(
@@ -87,7 +94,8 @@
                 typeof(InterfaceSplittingInterceptor<Impl4>),
                 typeof(InterfaceSplittingInterceptor<Impl5>),
                 typeof(InterfaceSplittingInterceptor<Impl6>),
-                typeof(InterfaceSplittingInterceptor<Impl7>));
+                typeof(InterfaceSplittingInterceptor<Impl7>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T, Impl1, Impl2, Impl3, Impl4, Impl5, Impl6, Impl7, Impl8>(
@@ -102,14 +110,16 @@
                 typeof(InterfaceSplittingInterceptor<Impl5>),
                 typeof(InterfaceSplittingInterceptor<Impl6>),
                 typeof(InterfaceSplittingInterceptor<Impl7>),
-                typeof(InterfaceSplittingInterceptor<Impl8>));
+                typeof(InterfaceSplittingInterceptor<Impl8>),
+                typeof(InterfaceSplittingBottomInterceptor));
         }
 
         public static ComponentRegistration<T> ImplementedAsSplittedInterfaceBy<T>(
             this ComponentRegistration<T> componentRegistration, params Type[] by)
             where T : class
         {
-            return componentRegistration.Interceptors(WrapTypesIntoInterceptor(by));
+            return componentRegistration.Interceptors(
+                WrapTypesIntoInterceptor(by).Concat(new[] { typeof(InterfaceSplittingBottomInterceptor) }).ToArray());
         }
 
         private static Type[] WrapTypesIntoInterceptor(Type[] types)

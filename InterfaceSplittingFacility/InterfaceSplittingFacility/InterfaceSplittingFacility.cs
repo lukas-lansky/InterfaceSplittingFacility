@@ -10,6 +10,9 @@
             this.Kernel.Register(
                 Component
                     .For(typeof(InterfaceSplittingInterceptor<>))
+                    .LifestyleTransient(),
+                Component
+                    .For(typeof(InterfaceSplittingBottomInterceptor))
                     .LifestyleTransient());
         }
     }

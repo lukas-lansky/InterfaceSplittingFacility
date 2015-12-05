@@ -46,7 +46,7 @@ If you don't control the IBig definition, you can leave it like this:
 
     Component.For<IBig>().ImplementedAsSplittedInterfaceBy<IBig, ISmall1, ISmall2, ISmall3>()
     
-This solution has an obvious problem: if you add a new method into IBig, it won't be aparent that it's not managed by any splitted interface. When you call method that is not part of any splitted interface, runtime exception is thrown.
+This solution has an obvious problem: if you add a new method into IBig, it won't be aparent that it's not managed by any splitted interface. When you call a method that is not a part of any splitted interface, NotImplementedException is thrown.
 
 ## Thanks
 
