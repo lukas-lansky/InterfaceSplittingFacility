@@ -81,5 +81,42 @@
             Assert.AreEqual(invocation.ReturnValue, null);
             invocation.VerifyAllExpectations();
         }
+
+        [TestMethod]
+        public void InterceptorCallsSimplePropertyMatch()
+        {
+            var implementation = MockRepository.GenerateMock<ISmall1>();
+            implementation.Stub(impl => impl.Property1).Return(true);
+
+            var invocation = MockRepository.GenerateMock<IInvocation>();
+            invocation.Stub(inv => inv.Method).Return(typeof(IBig).GetProperty(nameof(IBig.Property1)).GetGetMethod());
+            invocation.Stub(inv => inv.Arguments).Return(new object[] { });
+            invocation.Stub(inv => inv.ReturnValue).PropertyBehavior();
+            invocation.Expect(inv => inv.Proceed()).Repeat.Never();
+
+            var interceptor = new InterfaceSplittingInterceptor<ISmall1>(implementation);
+            interceptor.Intercept(invocation);
+
+            Assert.AreEqual(invocation.ReturnValue, true);
+            invocation.VerifyAllExpectations();
+        }
+
+        [TestMethod]
+        public void InterceptorPassSimplePropertyMismatch()
+        {
+            var implementation = MockRepository.GenerateMock<ISmall3>();
+
+            var invocation = MockRepository.GenerateMock<IInvocation>();
+            invocation.Stub(inv => inv.Method).Return(typeof(IBig).GetProperty(nameof(IBig.Property1)).GetGetMethod());
+            invocation.Stub(inv => inv.Arguments).Return(new object[] { });
+            invocation.Stub(inv => inv.ReturnValue).PropertyBehavior();
+            invocation.Expect(inv => inv.Proceed());
+
+            var interceptor = new InterfaceSplittingInterceptor<ISmall3>(implementation);
+            interceptor.Intercept(invocation);
+
+            Assert.AreEqual(invocation.ReturnValue, null);
+            invocation.VerifyAllExpectations();
+        }
     }
 }

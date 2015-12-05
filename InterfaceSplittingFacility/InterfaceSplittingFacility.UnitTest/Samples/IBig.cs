@@ -2,6 +2,8 @@
 {
     public interface IBig
     {
+        bool Property1 { get; set; }
+
         int Method1();
 
         void Method2();
