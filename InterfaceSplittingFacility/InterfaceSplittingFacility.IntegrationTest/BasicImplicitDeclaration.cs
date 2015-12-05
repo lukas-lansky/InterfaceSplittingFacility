@@ -11,6 +11,8 @@ namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
 
     public interface ISmall1
     {
+        bool SmallProperty1 { get; set; }
+
         int SmallMethod1();
     }
 
@@ -43,7 +45,9 @@ namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
                 );
 
             var instance = container.Resolve<IBig>();
+            instance.SmallProperty1 = true;
 
+            Assert.AreEqual(instance.SmallProperty1, true);
             Assert.AreEqual(instance.SmallMethod1(), 1);
             Assert.AreEqual(instance.SmallMethod2(), 2);
             Assert.AreEqual(instance.SmallMethod3(), 3);
@@ -53,6 +57,8 @@ namespace InterfaceSplittingFacility.IntegrationTest.BasicImplicitDeclaration
 
     public class DefaultSmall1 : ISmall1
     {
+        public bool SmallProperty1 { get; set; }
+
         public int SmallMethod1()
         {
             return 1;
