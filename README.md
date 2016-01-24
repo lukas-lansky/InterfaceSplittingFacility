@@ -1,5 +1,7 @@
 # InterfaceSplittingFacility
 
+![Current build status](https://ci.appveyor.com/api/projects/status/9ul39kmyrv3ibatg?svg=true)
+
 ## Reasoning
 
 Let's say you have to maintain a large interface with lots of rather unrelated methods. What an unfortunate situation to be in! You would love to adhere to SOLID design principles, but as your monstrous implementation dependency list grows, you start considering to stop using IoC framework to managing them.
